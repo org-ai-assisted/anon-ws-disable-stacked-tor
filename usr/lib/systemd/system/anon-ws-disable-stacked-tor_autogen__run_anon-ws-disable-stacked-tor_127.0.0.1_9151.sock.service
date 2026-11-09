@@ -38,4 +38,4 @@ MemoryDenyWriteExecute=yes
 SystemCallArchitectures=native
 LockPersonality=yes
 SystemCallFilter=~memfd_create
-NoExecPaths=/run /tmp /var/tmp /dev/shm
+NoExecPaths=/run /tmp /var/tmp /dev/shm /dev

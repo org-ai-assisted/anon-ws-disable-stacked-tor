@@ -267,7 +267,7 @@ MemoryDenyWriteExecute=yes
 SystemCallArchitectures=native
 LockPersonality=yes
 SystemCallFilter=~memfd_create
-NoExecPaths=/run /tmp /var/tmp /dev/shm" > "./usr/lib/systemd/system/anon-ws-disable-stacked-tor_autogen_${file_name}.service"
+NoExecPaths=/run /tmp /var/tmp /dev/shm /dev" > "./usr/lib/systemd/system/anon-ws-disable-stacked-tor_autogen_${file_name}.service"
 
    if [ "${system_run}" = "true" ]; then
       systemctl --system daemon-reload
