@@ -24,3 +24,15 @@ Requires=anon-ws-disable-stacked-tor_autogen_port_9102.socket
 ## https://www.whonix.org/wiki/Redirect_Whonix-Workstation_Ports_or_Unix_Domain_Socket_Files_to_Whonix-Gateway
 ExecStart=/usr/lib/systemd/systemd-socket-proxyd 10.152.152.10:9102
 PrivateTmp=yes
+
+## W^X hardening (anonymous + file-backed). MemoryDenyWriteExecute denies anon
+## W+X / mprotect/shmat gaining PROT_EXEC; SystemCallArchitectures=native closes
+## the secondary-ABI bypass; LockPersonality blocks READ_IMPLIES_EXEC;
+## SystemCallFilter=~memfd_create kills the memfd bypass; NoExecPaths marks the
+## writable dirs non-executable. systemd-socket-proxyd is a tiny upstream C
+## socket forwarder, no JIT.
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+LockPersonality=yes
+SystemCallFilter=~memfd_create
+NoExecPaths=/run /tmp /var/tmp /dev/shm
