@@ -44,5 +44,11 @@ LockPersonality=yes
 SystemCallFilter=~memfd_create
 NoExecPaths=/run /tmp /var/tmp /dev/shm /var/lib/tor
 
+## Defense-in-depth (separate axis from W^X): NoNewPrivileges blocks this
+## unit's processes from gaining privileges (setuid/setgid, file capabilities,
+## AppArmor non-subset Px). ExecStart (socat) and the root ExecStartPre
+## (state-files: cp/chmod/chown) gain no new privilege.
+NoNewPrivileges=yes
+
 [Install]
 WantedBy=multi-user.target
